@@ -1,0 +1,22 @@
+
+body{
+	background-color: brown;
+	text-align: center;
+	margin-top: 300px;
+}
+
+
+#time{
+	font-family: Romans;
+	font-size: 100px;
+	font-weight: Bold;
+}
+
+button{
+	height: 60px;
+	width: 80px;
+}
+
+button.hover{
+	cursor:pointer;
+}
