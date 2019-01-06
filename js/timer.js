@@ -1,28 +1,57 @@
-function watchTimer(elem){
-	let time =0; //to keep current time
+ class WatchTimer{
+ 	constructor(elem){
+ 	this.elem = elem;
+	this.time=0; //to keep current time
 	let interval; //to keep running update function
 	let offset; //to calculate how much time has passed
+	this.isOn = false;
+	
+	}
+
+	//to format time
 
 
-	function update(){
+
+	update(){
+
+	if(this.isOn){
+		this.time += this.timePass(); //add whatever we get from time pass function to time variable 
+	}
+
+		let formerTime = this.formatter(this.time);
+
+		this.elem.textContent = formerTime;
+
+	}
+	
+
+	start(){
+		if(!this.isOn){
+		this.interval = setInterval(this.update.bind(this), 1000 )//every 10miliseconds);
+		this.offset = Date.now();
+		this.isOn = true;
+		}
+	};
+
+
+
+	stop(){
 
 		if(this.isOn){
-		time += timePass(); //add whatever we get from time pass function to time variable 
-	}
-
-		let formerTime = formatter(time);
-
-		elem.textContent = formerTime;
-
-	}
-
-	function timePass(){
-		let now = Date.now();
-		let timePassed = now - offset;
-		offset = now // to ensure that next the function is run the now = to the last offset
+			clearInterval(this.interval); // this clear the interval that is set by start f{}
+			this.interval = null;
+			this.isOn=false;
+		}
+	};
 
 
-		return timePassed
+
+
+	timePass(){
+	 let now = new Date();
+	 let timeDiff = now - this.offset;
+	 this.offset = now // to ensure that next the function is run the now = to the last offset
+     return timeDiff
 
 
 	}
@@ -30,28 +59,29 @@ function watchTimer(elem){
 
 
 	//calculating  how  much time has passed
-	function formatter(timeInMilliseconds){
+	formatter(timeInMilliseconds){
 
-		let time = new Date(timeInMilliseconds);
+	 	let time = new Date(timeInMilliseconds);
 
+	 	let hours = time.getHours().toString();
+	 	console.log(hours);
 		let minutes = time.getMinutes().toString();
 		let seconds = time.getSeconds().toString();
-		let milliseconds = time.getMilliseconds().toString();
+			
+			if(hours.length < 2){
+			hours = `0${hours}`;
+		}
+
 			if(minutes.length < 2){
 			minutes = `0${minutes}`;
 		}
 
-			if(seconds.length < 2){
+		while(seconds.length < 2){
 			seconds = `0${seconds}`;
-		}
-
-
-		while(milliseconds.length < 3){
-			milliseconds = `0${milliseconds}`;
 
 		}
 
-		return `mins - ${minutes} : secs - ${seconds}. milisecs -${milliseconds}`;
+		return `hrs - ${hours} : mins - ${minutes} : secs -${seconds}`;
 
 
 	};
@@ -59,43 +89,20 @@ function watchTimer(elem){
 
 
 
-	//to format time
-
-	this.isOn = false;
-
-	this.start = function(){
-		if(!this.isOn){
-			interval = setInterval(update.bind(this), 10 )//every 10miliseconds);
-			offset = Date.now();
-			this.isOn = true;
-		}
-	};
-
-	this.stop = function(){
-
-		if(this.isOn){
-			clearInterval(interval); // this clear the interval that is set by start f{}
-			interval = null;
-			this.isOn=false;
-		}
-	};
-
-
-
-	this.reset = function(){
+	
+	reset(){
 
 
 		if(!this.isOn){
-		time = 0;
+		this.time = 0;
 
-		update();
+		this.update();
 
 	}	
 	};
 
 
 }
-
 
 //var watch = new watchTimer();
 //watch.start();
