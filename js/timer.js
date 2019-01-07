@@ -1,101 +1,108 @@
-function watchTimer(elem){
-	let time =0; //to keep current time
+ class WatchTimer{
+ 	constructor(elem){
+ 	this.elem = elem;
+	this.time=0; //to keep current time
 	let interval; //to keep running update function
 	let offset; //to calculate how much time has passed
-
-
-	function update(){
-
-		if(this.isOn){
-		time += timePass(); //add whatever we get from time pass function to time variable 
-	}
-
-		let formerTime = formatter(time);
-
-		elem.textContent = formerTime;
-
-	}
-
-	function timePass(){
-		let now = Date.now();
-		let timePassed = now - offset;
-		offset = now // to ensure that next the function is run the now = to the last offset
-
-
-		return timePassed
-
-
-	}
-
-
-
-	//calculating  how  much time has passed
-	function formatter(timeInMilliseconds){
-
-		let time = new Date(timeInMilliseconds);
-
-		let minutes = time.getMinutes().toString();
-		let seconds = time.getSeconds().toString();
-		let milliseconds = time.getMilliseconds().toString();
-			if(minutes.length < 2){
-			minutes = `0${minutes}`;
-		}
-
-			if(seconds.length < 2){
-			seconds = `0${seconds}`;
-		}
-
-
-		while(milliseconds.length < 3){
-			milliseconds = `0${milliseconds}`;
-
-		}
-
-		return `mins - ${minutes} : secs - ${seconds}. milisecs -${milliseconds}`;
-
-
-	};
-
-
-
-
-	//to format time
-
 	this.isOn = false;
+	
+	}
 
-	this.start = function(){
+	update(){
+
+	if(this.isOn){
+		this.time += this.timePass(); //add whatever we get from time pass function to time variable 
+	}
+
+		let timeFormatter = this.formatter(this.time);
+
+		this.elem.textContent = timeFormatter;
+
+	}
+	
+
+	start(){
 		if(!this.isOn){
-			interval = setInterval(update.bind(this), 10 )//every 10miliseconds);
-			offset = Date.now();
-			this.isOn = true;
+		this.interval = setInterval(this.update.bind(this), 1000 )//every 1000miliseconds);
+		this.offset = Date.now();
+		console.log(offset);
+		this.isOn = true;
 		}
 	};
 
-	this.stop = function(){
+
+
+	stop(){
 
 		if(this.isOn){
-			clearInterval(interval); // this clear the interval that is set by start f{}
-			interval = null;
+			clearInterval(this.interval); 
+			this.interval = null;
 			this.isOn=false;
 		}
 	};
 
 
 
-	this.reset = function(){
+
+	timePass(){
+	 let now = new Date();
+	 let timeDiff = now - this.offset;
+	 this.offset = now 
+     return timeDiff;
+
+	}
+
+
+
+	//calculating  how  much time has passed
+	formatter(timeInMilliseconds){
+
+	 	let time = new Date(timeInMilliseconds);
+
+	 	
+	 	let hours = Math.floor((this.time % (1000*60*60*24))/ (1000*60*60))
+	 	 console.log(hours);
+
+	 	let minutes = Math.floor((this.time % (1000 * 60 * 60)) / (1000 * 60));
+
+		let seconds = Math.floor((this.time % (1000 * 60))/1000);
+		
+			
+			if(hours< 10){
+			hours = `0${hours}`;
+		}
+
+			if(minutes < 10){
+			minutes = `0${minutes}`;
+		}
+
+		if (seconds < 10){
+			seconds = `0${seconds}`;
+
+		}
+
+		return `hrs - ${hours} : mins - ${minutes} : secs -${seconds}`;
+
+
+	};
+
+
+
+
+	
+	reset(){
 
 
 		if(!this.isOn){
-		time = 0;
+		this.time = 0;
 
-		update();
+		this.update();
 
 	}	
 	};
 
 
 }
-
 
 //var watch = new watchTimer();
 //watch.start();

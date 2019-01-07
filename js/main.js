@@ -3,7 +3,7 @@ let togglebt= document.getElementById('toggle');
 let btnreset =document.getElementById('reset');
 
 
-let watch = new watchTimer(time);
+let watch = new WatchTimer(time);
 
 
 
@@ -15,10 +15,11 @@ function start(){
 
 function stop(){
 	watch.stop();
-	togglebt.textContent ="start";
+	togglebt.textContent ="pause";
 }
 
 
+document.addEventListener('DOMContentLoaded', function(){
 
 togglebt.addEventListener('click', function(){
 
@@ -31,4 +32,4 @@ btnreset.addEventListener('click', function(){
 	watch.reset();
 });
 
-
+})
