@@ -1,4 +1,5 @@
  class WatchTimer{
+ 	
  	constructor(elem){
  	this.elem = elem;
 	this.time=0; //to keep current time
@@ -7,6 +8,7 @@
 	this.isOn = false;
 	
 	}
+
 
 	update(){
 
@@ -25,7 +27,7 @@
 		if(!this.isOn){
 		this.interval = setInterval(this.update.bind(this), 1000 )//every 1000miliseconds);
 		this.offset = Date.now();
-		console.log(offset);
+
 		this.isOn = true;
 		}
 	};
@@ -81,7 +83,7 @@
 
 		}
 
-		return `hrs - ${hours} : mins - ${minutes} : secs -${seconds}`;
+		return `${hours} : ${minutes} : ${seconds}`;
 
 
 	};
@@ -104,6 +106,5 @@
 
 }
 
-//var watch = new watchTimer();
-//watch.start();
+
 
