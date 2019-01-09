@@ -59,6 +59,7 @@ button.hover{
 	cursor:pointer;
 }
 
+<<<<<<< HEAD
 .container {
 	height: 0 auto;
 	width: 70%;
@@ -131,4 +132,10 @@ button.hover{
 	margin: auto;
 	background-color: #ffffff;
 	padding: 20px 30px;
+=======
+div{
+	height: 0 auto;
+	width: 0 auto;
+	background-color: #ffffff;
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 }

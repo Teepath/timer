@@ -6,7 +6,12 @@ let btnreset =document.getElementById('reset');
 let btnPause= document.getElementById('pause');
 
 
+<<<<<<< HEAD
 //class instatiation
+=======
+let watch = new WatchTimer(time);
+
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 
 const watch = new WatchTimer(time);
 
@@ -38,6 +43,7 @@ function pause(){
 
 function stop(){
 	watch.stop();
+<<<<<<< HEAD
 }
 
 function reset(){
@@ -50,6 +56,13 @@ function reset(){
 
 //listerrners
 eventListerners();
+=======
+	togglebt.textContent ="pause";
+}
+
+
+document.addEventListener('DOMContentLoaded', function(){
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 
  function eventListerners(){
 
@@ -64,6 +77,7 @@ btnreset.addEventListener('click', function(){
   
 });
 
+<<<<<<< HEAD
 btnPause.addEventListener('click', function(){
 	if(isStop){
     watch.reset();
@@ -74,3 +88,6 @@ btnPause.addEventListener('click', function(){
 })
 
 }
+=======
+})
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf

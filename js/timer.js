@@ -1,5 +1,8 @@
  class WatchTimer{
+<<<<<<< HEAD
  	
+=======
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
  	constructor(elem){
  	this.elem = elem;
 	this.time=0; //to keep current time
@@ -7,7 +10,16 @@
 	let offset; //to calculate how much time has passed
 	this.isOn = false;
 	
+<<<<<<< HEAD
 	}
+
+
+	update(){
+=======
+	}
+
+	//to format time
+
 
 
 	update(){
@@ -16,7 +28,47 @@
 		this.time += this.timePass(); //add whatever we get from time pass function to time variable 
 	}
 
+		let formerTime = this.formatter(this.time);
+
+		this.elem.textContent = formerTime;
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
+
+	if(this.isOn){
+		this.time += this.timePass(); //add whatever we get from time pass function to time variable 
+	}
+	
+
+<<<<<<< HEAD
 		let timeFormatter = this.formatter(this.time);
+=======
+	start(){
+		if(!this.isOn){
+		this.interval = setInterval(this.update.bind(this), 1000 )//every 10miliseconds);
+		this.offset = Date.now();
+		this.isOn = true;
+		}
+	};
+
+
+
+	stop(){
+
+		if(this.isOn){
+			clearInterval(this.interval); // this clear the interval that is set by start f{}
+			this.interval = null;
+			this.isOn=false;
+		}
+	};
+
+
+
+
+	timePass(){
+	 let now = new Date();
+	 let timeDiff = now - this.offset;
+	 this.offset = now // to ensure that next the function is run the now = to the last offset
+     return timeDiff
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 
 		this.elem.textContent = timeFormatter;
 
@@ -32,6 +84,7 @@
 		}
 	};
 
+<<<<<<< HEAD
 
 
 	stop(){
@@ -44,8 +97,31 @@
 	};
 
 
+=======
+	//calculating  how  much time has passed
+	formatter(timeInMilliseconds){
+
+	 	let time = new Date(timeInMilliseconds);
+
+	 	let hours = time.getHours().toString();
+	 	console.log(hours);
+		let minutes = time.getMinutes().toString();
+		let seconds = time.getSeconds().toString();
+			
+			if(hours.length < 2){
+			hours = `0${hours}`;
+		}
+
+			if(minutes.length < 2){
+			minutes = `0${minutes}`;
+		}
+
+		while(seconds.length < 2){
+			seconds = `0${seconds}`;
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 
 
+<<<<<<< HEAD
 	timePass(){
 	 let now = new Date();
 	 let timeDiff = now - this.offset;
@@ -91,6 +167,16 @@
 
 
 
+=======
+		return `hrs - ${hours} : mins - ${minutes} : secs -${seconds}`;
+
+
+	};
+
+
+
+
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 	
 	reset(){
 
@@ -106,5 +192,10 @@
 
 }
 
+<<<<<<< HEAD
 
+=======
+//var watch = new watchTimer();
+//watch.start();
+>>>>>>> c10e9a401eac265af9c5bacaf6bcfa85bed96dcf
 
